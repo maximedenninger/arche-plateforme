@@ -460,3 +460,38 @@ body.menu-ouvert { overflow:hidden; }
 html.sur-hero, html.sur-hero body { background:#1a2a1e; }
 .mot-geant img { filter:none; }
 .mot-geant { filter:drop-shadow(0 3px 16px rgba(50,32,8,.55)); }
+
+/* =========================================================================
+   SECTIONS À DÉFILEMENT HORIZONTAL (collées à l'écran pendant qu'on descend)
+   ========================================================================= */
+.horizontal { position:relative; margin:0 calc(-1 * var(--m)); border-top:1px solid var(--ligne); animation:none !important; scroll-margin-top:0; }
+.h-collant { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; padding:calc(var(--haut) + 64px) 0 calc(var(--bas) + 28px); }
+.h-tete { padding:0 var(--m); margin-bottom:18px; }
+.h-tete .titre-2 { margin:0; }
+.h-piste { display:flex; gap:14px; padding:0 var(--m); width:max-content; will-change:transform; }
+.h-panneau { flex:0 0 min(80vw, 420px); background:#fbf8f2; border:1px solid var(--ligne); display:flex; flex-direction:column; overflow:hidden; }
+.h-panneau img { width:100%; height:min(38svh, 300px); object-fit:cover; }
+.h-texte { padding:16px 18px 20px; position:relative; }
+.h-texte .ic { width:26px; height:26px; color:var(--vert); margin-bottom:6px; }
+.h-texte h3 { font:500 23px/1.12 var(--display); color:var(--vert); margin:0 0 8px; letter-spacing:-.01em; }
+.h-texte p { margin:0; font-size:14.5px; line-height:1.5; color:var(--gris); }
+.h-num { position:absolute; right:16px; top:14px; font:700 13px/1 var(--display); color:var(--sauge-txt); }
+.h-num.grand { position:static; display:block; font:700 54px/1 var(--display); letter-spacing:-.04em; color:var(--jaune); -webkit-text-stroke:1px var(--vert); margin-bottom:6px; }
+.h-barre { margin:20px var(--m) 0; height:3px; background:var(--ligne); }
+.h-barre i { display:block; height:100%; background:var(--vert); transform-origin:left; transform:scaleX(0); }
+.horizontal.sombre { background:var(--vert); border-top:0; }
+.horizontal.sombre .surtitre { color:var(--jaune); }
+.horizontal.sombre .titre-2 { color:var(--creme); }
+.horizontal.sombre .h-panneau { background:rgba(244,239,230,.06); border-color:rgba(244,239,230,.18); }
+.horizontal.sombre .h-texte h3 { color:var(--creme); }
+.horizontal.sombre .h-texte p { color:#cdd5c6; }
+.horizontal.sombre .h-num { color:var(--jaune); }
+.horizontal.sombre .h-barre { background:rgba(244,239,230,.2); }
+.horizontal.sombre .h-barre i { background:var(--jaune); }
+.support-h img { object-position:top; background:#e9e2d4; }
+/* sans animation : simple bande à faire glisser au doigt */
+.horizontal.libre { height:auto !important; }
+.horizontal.libre .h-collant { position:static; height:auto; padding:44px 0 24px; }
+.horizontal.libre .h-piste { width:auto; overflow-x:auto; scroll-snap-type:x mandatory; }
+.horizontal.libre .h-panneau { scroll-snap-align:start; }
+.horizontal.libre .h-barre { display:none; }

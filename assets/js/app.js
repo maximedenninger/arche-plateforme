@@ -9,7 +9,7 @@
    ========================================================================= */
 import { PAVILLONS, MENTION_MAQUETTE, GALERIE_SPECULATIVE } from './pavillons.js';
 import { ICONES } from './icones.js';
-import { intro, balayage, animer, fondVisible, calme, initParallaxe } from './anim.js';
+import { intro, balayage, animer, fondVisible, calme, initParallaxe, initHorizontal } from './anim.js';
 
 const app = document.getElementById('app');
 const ETAPES = 6;
@@ -166,18 +166,17 @@ function vueAccueil() {
       </ul>
     </section>
 
-    <section class="bloc">
-      <p class="surtitre">L'architecture spéculative en 3 idées</p>
-      <div class="mosaique">
-        <img src="assets/img/galerie/05_tours_organiques.webp" alt="Tours organiques couvertes de végétation" loading="lazy">
-        <img src="assets/img/galerie/02_ville_vegetale_vue_du_ciel.webp" alt="Ville végétale vue du ciel" loading="lazy">
-        <img src="assets/img/galerie/07_tour_en_bois_couverte_d_arbres.webp" alt="Tour en bois couverte d'arbres" loading="lazy">
+    <section class="horizontal" data-h aria-label="L'architecture spéculative en 3 idées">
+      <div class="h-collant">
+        <div class="h-tete"><p class="surtitre">L'architecture spéculative</p><h2 class="titre-2">En 3 idées</h2></div>
+        <div class="h-piste">
+          ${[['05_tours_organiques', 'lumiere', '01', 'Imaginer', 'Dessiner un futur possible : plus vert, plus dense, plus juste.'],
+             ['02_ville_vegetale_vue_du_ciel', 'aide', '02', 'Questionner', 'Partir d\u2019un enjeu d\u2019aujourd\u2019hui : climat, logement, ressources.'],
+             ['07_tour_en_bois_couverte_d_arbres', 'maquette', '03', 'Explorer', 'Tourner autour d\u2019une maquette pour comprendre, puis se faire son avis.']]
+            .map(([img, ico, n, t, d]) => `<article class="h-panneau"><img src="assets/img/galerie/${img}.webp" alt="" loading="lazy"><div class="h-texte"><span class="h-num">${n}</span>${ic(ico)}<h3>${t}</h3><p>${d}</p></div></article>`).join('')}
+        </div>
+        <div class="h-barre" aria-hidden="true"><i></i></div>
       </div>
-      <ul class="lignes">
-        <li>${ic('lumiere')}<b>Imaginer</b><span>Dessiner un futur possible : plus vert, plus dense, plus juste.</span></li>
-        <li>${ic('aide')}<b>Questionner</b><span>Partir d'un enjeu d'aujourd'hui : climat, logement, ressources.</span></li>
-        <li>${ic('maquette')}<b>Explorer</b><span>Tourner autour d'une maquette pour comprendre, puis se faire son avis.</span></li>
-      </ul>
     </section>
 
     <section class="bloc" id="pavillons">
@@ -202,26 +201,30 @@ function vueAccueil() {
       </a>`; }).join('')}
     </section>
 
-    <section class="bloc" id="comment">
-      <p class="surtitre">Comment ça marche</p>
-      <h2 class="titre-2">Une visite en 4 gestes</h2>
-      <ol class="etapes">
-        <li><b>01</b><div><strong>Repère une plaque ARCHE</strong><span>Sur un mur de la ville ou sur un stand, scanne le QR code avec l'appareil photo.</span></div></li>
-        <li><b>02</b><div><strong>Découvre la question</strong><span>Chaque lieu pose un « Et si… » : et si cette place s'élevait au-dessus des nuages ?</span></div></li>
-        <li><b>03</b><div><strong>Explore la maquette</strong><span>En 3D ou en réalité augmentée, avec 3 points d'intérêt pour comprendre l'échelle, l'usage et le message.</span></div></li>
-        <li><b>04</b><div><strong>Fais-toi ton avis</strong><span>Retiens l'essentiel en une synthèse, puis passe au pavillon suivant.</span></div></li>
-      </ol>
+    <section class="horizontal" id="comment" data-h aria-label="Comment ça marche">
+      <div class="h-collant">
+        <div class="h-tete"><p class="surtitre">Comment ça marche</p><h2 class="titre-2">Une visite en 4 gestes</h2></div>
+        <div class="h-piste">
+          ${[['supports/plaque', '01', 'Repère une plaque ARCHE', 'Sur un mur de la ville ou sur un stand, scanne le QR code avec l\u2019appareil photo.'],
+             ['galerie/10_au_dessus_des_nuages', '02', 'Découvre la question', 'Chaque lieu pose un « Et si… » : et si cette place s\u2019élevait au-dessus des nuages ?'],
+             ['mode_ar', '03', 'Explore la maquette', 'En 3D ou en réalité augmentée, avec 3 points d\u2019intérêt : l\u2019échelle, l\u2019usage, le message.'],
+             ['galerie/21_maquette_et_hologramme', '04', 'Fais-toi ton avis', 'Retiens l\u2019essentiel en une synthèse, puis passe au pavillon suivant.']]
+            .map(([img, n, t, d]) => `<article class="h-panneau etape"><img src="assets/img/${img}.webp" alt="" loading="lazy"><div class="h-texte"><span class="h-num grand">${n}</span><h3>${t}</h3><p>${d}</p></div></article>`).join('')}
+        </div>
+        <div class="h-barre" aria-hidden="true"><i></i></div>
+      </div>
     </section>
-
-    <section class="bloc" id="supports">
-      <p class="surtitre">Les supports</p>
-      <h2 class="titre-2">Quatre supports, une même visite</h2>
-      <div class="supports">
-        ${[['plateforme', '01', 'La plateforme web', 'Cette page : les maquettes à explorer en 3D ou en réalité augmentée, sans application.'],
-           ['ecran', '02', 'L’écran à parallaxe', 'Un écran qui suit le regard : vu de gauche, le lieu d’aujourd’hui ; vu de droite, sa version utopique.'],
-           ['depliant', '03', 'Le dépliant', 'À emporter : le parcours, la carte des pavillons et ce qu’est l’architecture spéculative.'],
-           ['plaque', '04', 'Les plaques QR', 'Posées sur les lieux eux-mêmes, elles ouvrent le pavillon qui les transforme.']]
-          .map(([k, n, t, d]) => `<figure class="support"><img src="assets/img/supports/${k}.webp" alt="${esc(t)}" loading="lazy"><figcaption><b>${n}</b><strong>${t}</strong><span>${d}</span></figcaption></figure>`).join('')}
+    <section class="horizontal sombre" id="supports" data-h aria-label="Les supports">
+      <div class="h-collant">
+        <div class="h-tete"><p class="surtitre">Les supports</p><h2 class="titre-2">Quatre supports, une même visite</h2></div>
+        <div class="h-piste">
+          ${[['plateforme', '01', 'La plateforme web', 'Cette page : les maquettes à explorer en 3D ou en réalité augmentée, sans application.'],
+             ['ecran', '02', 'L\u2019écran à parallaxe', 'Un écran qui suit le regard : vu de gauche, le lieu d\u2019aujourd\u2019hui ; vu de droite, sa version utopique.'],
+             ['depliant', '03', 'Le dépliant', 'À emporter : le parcours, la carte des pavillons et ce qu\u2019est l\u2019architecture spéculative.'],
+             ['plaque', '04', 'Les plaques QR', 'Posées sur les lieux eux-mêmes, elles ouvrent le pavillon qui les transforme.']]
+            .map(([k, n, t, d]) => `<article class="h-panneau support-h"><img src="assets/img/supports/${k}.webp" alt="${esc(t)}" loading="lazy"><div class="h-texte"><span class="h-num">${n}</span><h3>${t}</h3><p>${d}</p></div></article>`).join('')}
+        </div>
+        <div class="h-barre" aria-hidden="true"><i></i></div>
       </div>
     </section>
 
@@ -244,6 +247,7 @@ function vueAccueil() {
   </main>`;
   app.querySelectorAll('[data-aller]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.aller)?.scrollIntoView({ behavior: 'smooth' })));
   initParallaxe(document.getElementById('hero'), document.getElementById('barreAccueil'));
+  initHorizontal(app);
   if (ancreEnAttente) { const an = ancreEnAttente; ancreEnAttente = null; setTimeout(() => document.getElementById(an)?.scrollIntoView({ behavior: 'smooth' }), 400); }
 }
 

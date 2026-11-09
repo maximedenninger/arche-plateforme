@@ -129,3 +129,34 @@ export function initParallaxe(hero, barre) {
   nettoyerParallaxe = () => { run = false; document.documentElement.classList.remove('sur-hero'); removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
   addEventListener('hashchange', () => nettoyerParallaxe?.(), { once: true });
 }
+
+/* ---------- sections à défilement horizontal : en descendant, la section
+   reste collée à l'écran et ses panneaux défilent de droite à gauche ---------- */
+let nettoyerH = null;
+export function initHorizontal(racine) {
+  nettoyerH?.();
+  const secs = [...racine.querySelectorAll('[data-h]')].map(s => ({ s, piste: s.querySelector('.h-piste'), barre: s.querySelector('.h-barre i'), dist: 0 }));
+  if (!secs.length) return;
+  if (calme) { secs.forEach(x => x.s.classList.add('libre')); return; }
+  const mesure = () => secs.forEach(x => {
+    x.dist = Math.max(0, x.piste.scrollWidth - x.s.clientWidth);
+    x.s.style.height = `calc(100svh + ${x.dist}px)`;
+  });
+  let run = true;
+  const tour = () => {
+    if (!run) return;
+    for (const x of secs) {
+      const r = x.s.getBoundingClientRect(), total = x.s.offsetHeight - innerHeight;
+      if (r.bottom < -50 || r.top > innerHeight + 50) continue;
+      const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
+      x.piste.style.transform = `translate3d(${(-p * x.dist).toFixed(1)}px,0,0)`;
+      if (x.barre) x.barre.style.transform = `scaleX(${p.toFixed(3)})`;
+    }
+    requestAnimationFrame(tour);
+  };
+  mesure(); addEventListener('resize', mesure);
+  racine.querySelectorAll('.h-piste img').forEach(i => i.addEventListener('load', mesure, { once: true }));
+  requestAnimationFrame(tour);
+  nettoyerH = () => { run = false; removeEventListener('resize', mesure); };
+  addEventListener('hashchange', () => nettoyerH?.(), { once: true });
+}
