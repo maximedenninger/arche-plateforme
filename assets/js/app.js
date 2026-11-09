@@ -9,10 +9,11 @@
    ========================================================================= */
 import { PAVILLONS, MENTION_MAQUETTE } from './pavillons.js';
 import { ICONES } from './icones.js';
+import { intro, balayage, animer, fondVisible, calme } from './anim.js';
 
 const app = document.getElementById('app');
 const ETAPES = 6;
-const ic = (k, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true">${ICONES[k] || ''}</svg>`;
+const ic = (k, cls = '') => `<svg class="ic ${cls}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true">${ICONES[k] || ''}</svg>`;
 const logo = (cls = 'logo', blanc = false) => `<img class="${cls}" src="assets/logo/ARCHE_logotype_${blanc ? 'white' : 'color'}.svg" alt="ARCHE">`;
 const trouve = id => PAVILLONS.find(p => p.id === id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
@@ -42,7 +43,7 @@ function vueAccueil() {
   document.title = 'ARCHE · Architectures des futurs possibles';
   app.innerHTML = `<main class="ecran">
     <header class="barre">${logo('logo-gauche')}<span></span></header>
-    <div class="hero"><img src="assets/img/accueil.webp" alt="Îles habitées suspendues au-dessus des nuages, couvertes de forêts"></div>
+    <div class="hero"><span class="balayage"></span><img src="assets/img/accueil.webp" alt="Îles habitées suspendues au-dessus des nuages, couvertes de forêts"></div>
     <p class="surtitre">Architectures des futurs possibles</p>
     <h1 class="titre">Visite les villes de demain, en maquette</h1>
     <p class="texte">Trois pavillons imaginés pour Montpellier. Chacun pose une question sur notre façon d'habiter. Choisis-en un pour l'explorer en 3D ou dans ta pièce, en réalité augmentée.</p>
@@ -52,7 +53,7 @@ function vueAccueil() {
     <h2 class="surtitre" style="margin-top:32px">Les pavillons</h2>
     ${PAVILLONS.map(p => `
       <a class="carte" href="#/p/${p.id}">
-        <img src="${p.image}" alt="" loading="lazy">
+        <div class="carte-img"><img src="${p.image}" alt="" loading="lazy"><span class="grand-num">${p.id}</span><span class="coord">${p.coord}</span></div>
         <div class="corps">
           <span class="numero">Pavillon ${p.id} · ${esc(p.lieu)}</span>
           <h3>${esc(p.titre)}</h3>
@@ -144,7 +145,7 @@ function vueMaquette(p) {
   let etat = 'global', idx = -1, guide = true, onglet = 'echelle';
   app.innerHTML = `<main class="vision">
     <model-viewer id="mv" src="${p.modele}" alt="Maquette 3D du pavillon ${p.id} : ${esc(p.titre)}"
-      camera-controls touch-action="none" interaction-prompt="none" shadow-intensity="1" shadow-softness="0.8" exposure="1.05"
+      camera-controls auto-rotate auto-rotate-delay="1500" rotation-per-second="8deg" touch-action="none" interaction-prompt="none" shadow-intensity="1" shadow-softness="0.8" exposure="1.05"
       camera-orbit="${p.vueGlobale.orbite}" camera-target="${decaleInit(p)}" field-of-view="30deg"
       min-camera-orbit="auto 5deg 0.18m" max-camera-orbit="auto 88deg 1.3m" interpolation-decay="140"
       ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" ar-placement="floor">
@@ -175,6 +176,8 @@ function vueMaquette(p) {
 
   mv.addEventListener('progress', e => { const i = document.querySelector('#charge i'); if (i) i.style.width = (e.detail.totalProgress * 100) + '%'; });
   mv.addEventListener('load', () => {
+    mv.classList.add('chargee');
+    document.querySelectorAll('.point').forEach((b, i) => setTimeout(() => b.classList.add('apparait'), 500 + i * 220));
     document.getElementById('charge')?.remove();
     if (mv.canActivateAR) btnAR.hidden = false;
     rendu();
@@ -202,6 +205,7 @@ function vueMaquette(p) {
     document.querySelectorAll('.point').forEach(b => b.classList.toggle('actif', +b.dataset.i === idx && etat === 'point'));
     document.querySelectorAll('.mode button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.g === (guide ? 1 : 0))));
     prog.innerHTML = progression(etat === 'point' ? 5 : 4);
+    mv.autoRotate = etat === 'global' && !calme;
     if (etat === 'global') {
       const ar = modeChoisi === 'ar' && mv.canActivateAR;
       panneau.innerHTML = `<div class="poignee"></div>
@@ -286,18 +290,24 @@ function vueFin(p) {
 }
 
 /* ---------------------------------------------------------------- routeur */
-function route() {
+let premier = true;
+async function route() {
   const [, , id, etape] = (location.hash || '#/').split('/');
   const p = id && trouve(id);
+  if (premier) { premier = false; await intro(); } else await balayage();
   window.scrollTo(0, 0);
-  if (!p) return vueAccueil();
-  document.title = `ARCHE · ${p.titre}`;
-  if (!etape) return vuePavillon(p);
-  if (etape === '2') return vueIntro(p);
-  if (etape === '3') return vueMode(p);
-  if (etape === 'vue') return vueMaquette(p);
-  if (etape === 'fin') return vueFin(p);
-  vuePavillon(p);
+  if (!p) vueAccueil();
+  else {
+    document.title = `ARCHE · ${p.titre}`;
+    if (!etape) vuePavillon(p);
+    else if (etape === '2') vueIntro(p);
+    else if (etape === '3') vueMode(p);
+    else if (etape === 'vue') vueMaquette(p);
+    else if (etape === 'fin') vueFin(p);
+    else vuePavillon(p);
+  }
+  fondVisible(!app.querySelector('.vision'));
+  animer(app);
 }
 addEventListener('hashchange', route);
 route();
