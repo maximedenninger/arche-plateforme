@@ -386,7 +386,7 @@ button.poignee { display:block; width:60px; height:20px; margin:-4px auto 8px; b
 @keyframes couche { from { opacity:0; translate:0 40px; } }
 
 /* sections de l'accueil */
-.ecran.accueil { min-height:0; padding-top:8px; background:var(--creme); }
+.ecran.accueil { min-height:0; padding-top:8px; background:transparent; }
 .bloc { padding:44px 0 8px; scroll-margin-top:60px; }
 .bloc + .bloc { border-top:1px solid var(--ligne); }
 .manifeste { font-size:clamp(30px, 8.6vw, 42px); }
@@ -497,3 +497,12 @@ html.sur-hero, html.sur-hero body { background:#1a2a1e; }
 .horizontal.libre .h-piste { width:auto; overflow-x:auto; scroll-snap-type:x mandatory; }
 .horizontal.libre .h-panneau { scroll-snap-align:start; }
 .horizontal.libre .h-barre { display:none; }
+
+/* le fond vivant (trame iso + pollen) doit rester visible derrière les sections */
+.h-panneau { background:rgba(251,248,242,.82); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px); }
+.carte { background:rgba(251,248,242,.9); }
+.choix { background:rgba(251,248,242,.85); }
+.plan { background-color:rgba(236,229,216,.85); }
+.fond-vivant .trame { opacity:.26; -webkit-mask-image:none; mask-image:none; }
+body { background:var(--creme); }
+@media (min-width:700px) { .ecran { background:transparent; box-shadow:none; } body { background:var(--creme); } }
