@@ -204,8 +204,9 @@ function vueMaquette(p) {
     mv.cameraTarget = decale(pt.cible, pt.orbite, 0.07); mv.cameraOrbit = pt.orbite;
   };
   const versGlobal = () => { mv.cameraTarget = decale(p.vueGlobale.cible, p.vueGlobale.orbite, 0.05); mv.cameraOrbit = p.vueGlobale.orbite; };
-  // Android : vraie AR (WebXR) avec les points ; iPhone : vue caméra guidée,
-  // car l'AR native d'Apple (Quick Look) ne sait pas afficher de points cliquables
+  // Android : vraie AR (WebXR) avec les points ; iPhone : vraie AR d'Apple (Quick Look),
+  // qui affiche la maquette seule (Apple ne permet pas d'y ajouter des points cliquables).
+  // La vue caméra ne sert qu'en secours, si l'appareil n'a pas d'AR.
   const vision = document.querySelector('.vision'), cam = document.getElementById('camera');
   let flux = null;
   async function demarrerCamera() {
@@ -223,11 +224,9 @@ function vueMaquette(p) {
   }
   document.getElementById('quitter-camera').addEventListener('click', arreterCamera);
   const lancerAR = () => {
-    if (ios) return demarrerCamera();
     if (mv.canActivateAR) mv.activateAR();
     else demarrerCamera();
   };
-  const arNatif = () => { if (mv.canActivateAR) mv.activateAR(); };
   addEventListener('hashchange', () => flux && arreterCamera(), { once: true });
 
   function rendu() {
@@ -246,10 +245,9 @@ function vueMaquette(p) {
         ${enAR ? `<p class="texte" style="margin-top:-6px"><b style="color:var(--vert)">Tu es en réalité augmentée.</b> Les points jaunes se touchent directement sur la maquette.</p>` : ''}
         ${guide ? `<button class="btn ${ar ? 'btn--contour' : ''}" id="commencer">Commencer la visite guidée ${ic('suivant')}</button>`
                 : `<a class="btn ${ar ? 'btn--contour' : ''}" href="#/p/${p.id}/fin">Terminer la visite ${ic('suivant')}</a>`}
-        ${ar && ios && mv.canActivateAR ? `<button class="lien-discret" id="natif">Ouvrir en AR native iPhone (sans les points)</button>` : ''}
+        ${ar && ios ? `<p class="note" style="margin-top:8px">Sur iPhone, la réalité augmentée montre la maquette seule : les points d'intérêt se découvrent ici, en 3D.</p>` : ''}
         <p class="note">Maquette au ${p.echelleMaquette}, socle de 40 cm. Le bâtiment n'est pas représenté à taille réelle.</p>`;
       panneau.querySelector('#placer')?.addEventListener('click', lancerAR);
-      panneau.querySelector('#natif')?.addEventListener('click', arNatif);
       panneau.querySelector('#commencer')?.addEventListener('click', () => { etat = 'point'; idx = 0; onglet = 'echelle'; versPoint(0); rendu(); });
     } else {
       const pt = p.points[idx], o = pt.onglets[onglet], dernier = idx === p.points.length - 1;
