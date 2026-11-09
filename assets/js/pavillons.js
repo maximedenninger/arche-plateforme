@@ -197,4 +197,4 @@ export const GALERIE_SPECULATIVE = [
 ];
 
 /* Mention obligatoire (projet d'école) : affichée en petit partout où l'on voit une maquette */
-export const MENTION_MAQUETTE = 'Maquettes numériques à l’échelle, présentées dans le cadre d’un projet d’étude. Les bâtiments ne sont pas représentés à taille réelle.';
+export const MENTION_MAQUETTE = 'Maquettes numériques à l’échelle : les bâtiments ne sont pas représentés à taille réelle.';

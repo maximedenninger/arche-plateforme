@@ -97,28 +97,35 @@ export function initParallaxe(hero, barre) {
   if (!hero) return;
   const couches = [...hero.querySelectorAll('[data-v]')].map(el => ({ el, v: +el.dataset.v }));
   let sy = 0, ix = 0, iy = 0, cx = 0, cy = 0, run = true;
-  const surScroll = () => { sy = scrollY; barre?.classList.toggle('solide', sy > hero.offsetHeight - 90); };
+  const surScroll = () => { sy = scrollY; barre?.classList.toggle('visible', sy > 80); barre?.classList.toggle('solide', sy > hero.offsetHeight - 90); };
   const surSouris = e => { ix = (e.clientX / innerWidth - 0.5) * 2; iy = (e.clientY / innerHeight - 0.5) * 2; };
   const surTilt = e => { if (e.gamma == null) return; ix = Math.max(-1, Math.min(1, e.gamma / 25)); iy = Math.max(-1, Math.min(1, (e.beta - 45) / 25)); };
   addEventListener('scroll', surScroll, { passive: true });
   addEventListener('pointermove', surSouris, { passive: true });
   addEventListener('deviceorientation', surTilt, { passive: true });
+  let derniere = '';
+  const t = hero.querySelector('.hero-texte');
   const tour = () => {
     if (!run) return;
-    cx += (ix - cx) * 0.06; cy += (iy - cy) * 0.06;
-    if (sy < hero.offsetHeight * 1.3) {
-      for (const { el, v } of couches) {
-        const ty = sy * v * 0.55, tx = cx * v * 14, tz = cy * v * 8;
-        el.style.transform = `translate3d(${tx.toFixed(1)}px, ${(ty + tz).toFixed(1)}px, 0) scale(${(1.06 + v * 0.06 + sy * v * 0.00012).toFixed(4)})`;
+    cx += (ix - cx) * 0.08; cy += (iy - cy) * 0.08;
+    const h = hero.offsetHeight;
+    if (sy < h * 1.2) {
+      const cle = `${sy}|${cx.toFixed(3)}|${cy.toFixed(3)}`;
+      if (cle !== derniere) {
+        derniere = cle;
+        for (const { el, v } of couches) {
+          const ty = Math.round(sy * v * 0.5 * 10) / 10, tx = Math.round(cx * v * 140) / 10, tz = Math.round(cy * v * 80) / 10;
+          el.style.transform = `translate3d(${tx}px, ${ty + tz}px, 0) scale(1.1)`;
+        }
+        if (t) { t.style.transform = `translate3d(0, ${Math.round(sy * 0.25)}px, 0)`; t.style.opacity = Math.max(0, 1 - sy / (h * 0.6)).toFixed(2); }
       }
-      const t = hero.querySelector('.hero-texte');
-      if (t) { t.style.transform = `translate3d(0, ${(sy * 0.25).toFixed(1)}px, 0)`; t.style.opacity = Math.max(0, 1 - sy / (hero.offsetHeight * 0.6)).toFixed(3); }
     }
+    document.documentElement.classList.toggle('sur-hero', sy < h - 60);
     requestAnimationFrame(tour);
   };
   surScroll();
   if (!calme) requestAnimationFrame(tour);
   hero.classList.add('pret');
-  nettoyerParallaxe = () => { run = false; removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
+  nettoyerParallaxe = () => { run = false; document.documentElement.classList.remove('sur-hero'); removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
   addEventListener('hashchange', () => nettoyerParallaxe?.(), { once: true });
 }

@@ -349,33 +349,33 @@ button.poignee { display:block; width:60px; height:20px; margin:-4px auto 8px; b
 .burger { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:5px; }
 .burger span { display:block; width:24px; height:2px; background:currentColor; transition:width .2s; }
 .burger span:nth-child(2) { width:16px; align-self:flex-end; margin-right:14px; }
-.burger.clair { color:var(--creme); }
+.burger.sur-image { color:var(--creme); }
 .barre-accueil.solide .burger { color:var(--vert); }
 .barre .burger { justify-self:end; }
 
 /* hero plein écran en parallaxe */
-.hero-par { position:relative; height:100svh; min-height:560px; overflow:hidden; background:#cfd8d4; isolation:isolate; }
+.hero-par { position:relative; height:100lvh; min-height:560px; overflow:hidden; background:#cfd8d4; isolation:isolate; }
 .couches, .couche { position:absolute; inset:0; }
-.couche { will-change:transform; transform:scale(1.08); }
+.couche { will-change:transform; transform:translate3d(0,0,0) scale(1.1); backface-visibility:hidden; }
 .couche img { width:100%; height:100%; object-fit:cover; object-position:50% 60%; }
 .mot-geant { display:flex; align-items:flex-start; justify-content:center; padding-top:calc(var(--haut) + 21svh); }
-.mot-geant img { width:86%; height:auto; object-fit:contain; opacity:.96; filter:drop-shadow(0 4px 28px rgba(60,40,10,.35)) drop-shadow(0 1px 2px rgba(60,40,10,.25)); }
+.mot-geant img { width:min(62%, 300px); height:auto; object-fit:contain; opacity:.96; filter:drop-shadow(0 4px 28px rgba(60,40,10,.35)) drop-shadow(0 1px 2px rgba(60,40,10,.25)); }
 .flotte img { animation:flotte 7s ease-in-out infinite; }
 .flotte.lent img { animation-duration:10s; animation-delay:-3s; }
 @keyframes flotte { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
-.hero-par::after { content:""; position:absolute; inset:auto 0 0 0; height:58%; z-index:2; pointer-events:none;
-  background:linear-gradient(rgba(20,32,22,0), rgba(20,32,22,.55) 55%, rgba(20,32,22,.82)); }
+.hero-par::after { content:""; position:absolute; inset:auto 0 0 0; height:72%; z-index:2; pointer-events:none;
+  background:linear-gradient(rgba(16,26,18,0), rgba(16,26,18,.45) 30%, rgba(16,26,18,.78) 60%, rgba(16,26,18,.9)); }
 .hero-par::before { content:""; position:absolute; left:-10%; right:-10%; bottom:0; height:3px; background:var(--jaune); z-index:4; transform:rotate(-7.3deg); transform-origin:left bottom;
   box-shadow:0 0 18px 3px rgba(232,201,106,.55); }
-.hero-texte { position:absolute; left:0; right:0; bottom:calc(var(--bas) + 74px); z-index:3; padding:0 var(--m); color:var(--creme); }
-.hero-texte .surtitre { color:var(--jaune); }
-.hero-texte .titre { color:var(--creme); font-size:clamp(34px, 10vw, 52px); text-shadow:0 2px 24px rgba(0,0,0,.25); margin-bottom:22px; }
+.hero-texte { position:absolute; left:0; right:0; bottom:calc(100lvh - 100svh + var(--bas) + 74px); z-index:3; padding:0 var(--m); color:var(--creme); }
+.hero-texte .surtitre { color:var(--jaune); text-shadow:0 1px 10px rgba(0,0,0,.6); }
+.hero-texte .titre { color:var(--creme); font-size:clamp(34px, 10vw, 52px); text-shadow:0 2px 18px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.4); margin-bottom:22px; }
 .hero-actions { display:grid; gap:10px; }
 .hero-actions .btn + .btn { margin-top:0; }
 .btn--jaune { background:var(--jaune); color:var(--encre); }
 .btn--jaune:active { background:#d9b955; }
 .btn--verre { background:rgba(244,239,230,.14); color:var(--creme); box-shadow:inset 0 0 0 1.5px rgba(244,239,230,.75); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); }
-.defiler { position:absolute; left:50%; bottom:calc(var(--bas) + 16px); transform:translateX(-50%); z-index:3; display:flex; flex-direction:column; align-items:center; gap:6px;
+.defiler { position:absolute; left:50%; bottom:calc(100lvh - 100svh + var(--bas) + 16px); transform:translateX(-50%); z-index:3; display:flex; flex-direction:column; align-items:center; gap:6px;
   border:0; background:none; color:var(--creme); font:600 10.5px/1 var(--texte); letter-spacing:.2em; text-transform:uppercase; cursor:pointer; min-height:44px; }
 .defiler span { width:2px; height:22px; background:linear-gradient(var(--jaune), rgba(232,201,106,0)); animation:goutte 1.8s ease-in-out infinite; }
 @keyframes goutte { 0% { transform:scaleY(0); transform-origin:top; } 50% { transform:scaleY(1); transform-origin:top; } 51% { transform-origin:bottom; } 100% { transform:scaleY(0); transform-origin:bottom; } }
@@ -448,3 +448,15 @@ body.menu-ouvert { overflow:hidden; }
 @media (prefers-reduced-motion: reduce) { .hero-par .couche, .flotte img, .menu, .menu li { animation:none !important; } }
 
 .epingle b i { font-style:normal; transform:rotate(45deg); }
+
+/* barre de l'accueil : absente tout en haut, elle apparaît dès qu'on défile */
+.barre-accueil { opacity:0; transform:translateY(-100%); pointer-events:none; transition:opacity .3s, transform .35s cubic-bezier(.2,.7,.2,1), background .3s, box-shadow .3s; }
+.barre-accueil.visible { opacity:1; transform:none; pointer-events:auto; background:rgba(244,239,230,.94); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--ligne); }
+.barre-accueil.visible .clair { opacity:0; } .barre-accueil.visible .fonce { opacity:1; }
+.barre-accueil.visible .burger { color:var(--vert); }
+.btn--verre { background:rgba(16,26,18,.35); }
+
+/* fond sombre derrière les barres de Safari tant que le hero est à l'écran (plus de bandes blanches) */
+html.sur-hero, html.sur-hero body { background:#1a2a1e; }
+.mot-geant img { filter:none; }
+.mot-geant { filter:drop-shadow(0 3px 16px rgba(50,32,8,.55)); }

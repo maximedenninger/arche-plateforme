@@ -121,7 +121,7 @@ function ouvrirMenu() {
   addEventListener('keydown', function esc_(e) { if (e.key === 'Escape') { ferme(); removeEventListener('keydown', esc_); } });
   document.body.appendChild(m); document.body.classList.add('menu-ouvert');
 }
-const burger = (clair = false) => `<button class="btn-icone burger ${clair ? 'clair' : ''}" data-menu aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>`;
+const burger = (clair = false) => `<button class="btn-icone burger ${clair ? 'sur-image' : ''}" data-menu aria-label="Ouvrir le menu"><span></span><span></span><span></span></button>`;
 
 /* ---------------------------------------------------------------- accueil plateforme */
 const CARTE = { '01': [0.5, 0.7], '02': [0.24, 0.3], '03': [0.76, 0.76] };
@@ -227,8 +227,9 @@ function vueAccueil() {
 
     <section class="bloc" id="apropos">
       <p class="surtitre">À propos</p>
-      <h2 class="titre-2">Un projet de fin d'études</h2>
-      <p class="texte">ARCHE est le projet de M2 Direction artistique de Maxime Denninger, à e-artsup Montpellier (2026). Il accompagne un mémoire qui pose une question : <b>comment rendre les architectures spéculatives compréhensibles par un public non spécialiste ?</b></p>
+      <h2 class="titre-2">Rendre le futur lisible</h2>
+      <p class="texte">ARCHE est un dispositif de médiation. Il installe des architectures spéculatives dans l'espace public, là où elles imaginent transformer la ville, pour que chacun puisse les comprendre, s'en faire un avis et en parler.</p>
+      <p class="texte">Nos pavillons ne sont pas des projets de construction : ce sont des <b>questions posées à la ville</b>, présentées sous forme de maquettes.</p>
       <p class="petit">${esc(MENTION_MAQUETTE)}</p>
       <div class="final">
         <p class="titre-2">Prêt à décoller ?</p>
@@ -238,7 +239,7 @@ function vueAccueil() {
 
     <footer class="pied">
       ${logo('logo-pied')}
-      <p class="petit">Architectures des futurs possibles · Projet d'étude · e-artsup Montpellier · 2026. Aucune donnée personnelle enregistrée.</p>
+      <p class="petit">Architectures des futurs possibles · Montpellier · 2026. Aucune donnée personnelle enregistrée.</p>
     </footer>
   </main>`;
   app.querySelectorAll('[data-aller]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.aller)?.scrollIntoView({ behavior: 'smooth' })));
