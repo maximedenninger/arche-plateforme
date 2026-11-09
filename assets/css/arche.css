@@ -468,7 +468,9 @@ html.sur-hero, html.sur-hero body { background:#1a2a1e; }
 .h-collant { position:sticky; top:0; height:100svh; overflow:hidden; display:flex; flex-direction:column; justify-content:center; padding:calc(var(--haut) + 64px) 0 calc(var(--bas) + 28px); }
 .h-tete { padding:0 var(--m); margin-bottom:18px; }
 .h-tete .titre-2 { margin:0; }
-.h-piste { display:flex; gap:14px; padding:0 var(--m); width:max-content; will-change:transform; }
+.h-piste { display:flex; gap:14px; padding:0 var(--m); will-change:transform; }
+.h-panneau { flex-shrink:0; min-width:0; }
+.h-panneau img { max-width:100%; }
 .h-panneau { flex:0 0 min(80vw, 420px); background:#fbf8f2; border:1px solid var(--ligne); display:flex; flex-direction:column; overflow:hidden; }
 .h-panneau img { width:100%; height:min(38svh, 300px); object-fit:cover; }
 .h-texte { padding:16px 18px 20px; position:relative; }

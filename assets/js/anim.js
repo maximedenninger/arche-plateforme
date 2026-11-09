@@ -135,18 +135,21 @@ export function initParallaxe(hero, barre) {
 let nettoyerH = null;
 export function initHorizontal(racine) {
   nettoyerH?.();
-  const secs = [...racine.querySelectorAll('[data-h]')].map(s => ({ s, piste: s.querySelector('.h-piste'), barre: s.querySelector('.h-barre i'), dist: 0 }));
+  const secs = [...racine.querySelectorAll('[data-h]')].map(s => ({ s, c: s.querySelector('.h-collant'), piste: s.querySelector('.h-piste'), barre: s.querySelector('.h-barre i'), dist: 0 }));
   if (!secs.length) return;
   if (calme) { secs.forEach(x => x.s.classList.add('libre')); return; }
+  // distance à parcourir = bord droit du dernier panneau + marge, moins la largeur de l'écran
+  // (mesurée sur les panneaux eux-mêmes : Safari calcule mal la largeur totale de la bande)
   const mesure = () => secs.forEach(x => {
-    x.dist = Math.max(0, x.piste.scrollWidth - x.s.clientWidth);
-    x.s.style.height = `calc(100svh + ${x.dist}px)`;
+    const der = x.piste.lastElementChild, marge = parseFloat(getComputedStyle(x.piste).paddingLeft) || 0;
+    x.dist = Math.max(0, Math.round(der.offsetLeft + der.offsetWidth + marge - x.s.clientWidth));
+    x.s.style.height = (x.c.offsetHeight + x.dist) + 'px';
   });
   let run = true;
   const tour = () => {
     if (!run) return;
     for (const x of secs) {
-      const r = x.s.getBoundingClientRect(), total = x.s.offsetHeight - innerHeight;
+      const r = x.s.getBoundingClientRect(), total = x.s.offsetHeight - x.c.offsetHeight;
       if (r.bottom < -50 || r.top > innerHeight + 50) continue;
       const p = total > 0 ? Math.min(1, Math.max(0, -r.top / total)) : 0;
       x.piste.style.transform = `translate3d(${(-p * x.dist).toFixed(1)}px,0,0)`;
