@@ -103,7 +103,8 @@ export function initParallaxe(hero, barre) {
   addEventListener('scroll', surScroll, { passive: true });
   addEventListener('pointermove', surSouris, { passive: true });
   addEventListener('deviceorientation', surTilt, { passive: true });
-  let derniere = '';
+  let derniere = '', etatBarre = null;
+  const meta = document.querySelector('meta[name="theme-color"]');
   const t = hero.querySelector('.hero-texte');
   const tour = () => {
     if (!run) return;
@@ -120,13 +121,15 @@ export function initParallaxe(hero, barre) {
         if (t) { t.style.transform = `translate3d(0, ${Math.round(sy * 0.25)}px, 0)`; t.style.opacity = Math.max(0, 1 - sy / (h * 0.6)).toFixed(2); }
       }
     }
-    document.documentElement.classList.toggle('sur-hero', sy < h - 60);
+    // couleur des barres du navigateur : vert sombre sur le hero, crème ensuite (le contenu de la page ne change pas)
+    const surHero = sy < h - 60;
+    if (surHero !== etatBarre) { etatBarre = surHero; meta?.setAttribute('content', surHero ? '#1a2a1e' : '#f4efe6'); }
     requestAnimationFrame(tour);
   };
   surScroll();
   if (!calme) requestAnimationFrame(tour);
   hero.classList.add('pret');
-  nettoyerParallaxe = () => { run = false; document.documentElement.classList.remove('sur-hero'); removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
+  nettoyerParallaxe = () => { run = false; meta?.setAttribute('content', '#f4efe6'); removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
   addEventListener('hashchange', () => nettoyerParallaxe?.(), { once: true });
 }
 

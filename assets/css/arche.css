@@ -457,7 +457,7 @@ body.menu-ouvert { overflow:hidden; }
 .btn--verre { background:rgba(16,26,18,.35); }
 
 /* fond sombre derrière les barres de Safari tant que le hero est à l'écran (plus de bandes blanches) */
-html.sur-hero, html.sur-hero body { background:#1a2a1e; }
+
 .mot-geant img { filter:none; }
 .mot-geant { filter:drop-shadow(0 3px 16px rgba(50,32,8,.55)); }
 
