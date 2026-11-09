@@ -1,3 +1,4 @@
+[hidden] { display:none !important; }
 /* =========================================================================
    ARCHE · plateforme web · mobile first
    Règle d'interface : tout ce qui se touche a un fond plein, un contour ou
@@ -133,7 +134,7 @@ a { color:inherit; }
 .vision .mode button[aria-pressed="true"] { background:var(--vert); color:var(--creme); }
 .vision .echelle-note { display:none; position:absolute; left:var(--m); right:76px; z-index:2; bottom:calc(var(--bas) + var(--panneau, 190px) + 10px); font-size:11px; line-height:1.35; color:var(--gris); }
 .panneau { position:absolute; left:0; right:0; bottom:0; z-index:4; background:var(--creme); padding:10px var(--m) calc(var(--bas) + 18px); box-shadow:0 -6px 24px rgba(0,0,0,.12);
-  max-height:50dvh; overflow:auto; transition:transform .25s ease; }
+  max-height:44dvh; overflow:auto; overscroll-behavior:contain; transition:transform .25s ease; }
 .panneau .poignee { width:40px; height:4px; background:var(--ligne); margin:0 auto 14px; }
 .panneau .fermer { position:absolute; right:8px; top:6px; }
 .chargement { position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); text-align:center; color:var(--sauge-txt); font:600 12px/1.4 var(--texte); letter-spacing:.14em; text-transform:uppercase; z-index:2; pointer-events:none; }
@@ -268,3 +269,11 @@ a { color:inherit; }
   .ecran > *, .mot > span, .hero img, .arche-img img, .hero .balayage, .fond-vivant .trame, .progression li::after, .point.apparait::before { animation:none !important; }
   .a-voir { opacity:1; transform:none; transition:none; }
 }
+
+/* réalité augmentée : panneau dans model-viewer (visible en WebXR) et vue caméra sur iPhone */
+model-viewer .panneau { position:absolute; }
+.camera { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.vision.camera-on model-viewer { background:transparent; z-index:1; }
+.vision.camera-on::before { display:none; }
+.vision.camera-on .haut { background:linear-gradient(rgba(244,239,230,.92) 55%, rgba(244,239,230,0)); }
+.lien-discret { display:block; margin:12px auto 0; border:0; background:none; color:var(--vert); font:600 13px/1.3 var(--texte); text-decoration:underline; text-underline-offset:3px; cursor:pointer; min-height:40px; }

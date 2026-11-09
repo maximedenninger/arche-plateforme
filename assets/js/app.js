@@ -18,6 +18,7 @@ const logo = (cls = 'logo', blanc = false) => `<img class="${cls}" src="assets/l
 const trouve = id => PAVILLONS.find(p => p.id === id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
 const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 let modeChoisi = sessionStorage.getItem('arche-mode') || (mobile ? 'ar' : '3d');
 
 function barre(retour, droite = '') {
@@ -154,7 +155,9 @@ function vueMaquette(p) {
           data-visibility-attribute="visible" aria-label="Point ${i + 1} : ${esc(pt.nom)}"><span>${i + 1}</span></button>`).join('')}
       <button slot="ar-button" hidden></button>
       <div class="chargement" slot="progress-bar" id="charge">Chargement de la maquette<div class="jauge"><i></i></div></div>
+      <section class="panneau" id="panneau" aria-live="polite"></section>
     </model-viewer>
+    <video id="camera" class="camera" playsinline muted hidden></video>
     <div class="haut">
       ${barre(`#/p/${p.id}/3`)}
       <div id="prog"></div>
@@ -165,9 +168,9 @@ function vueMaquette(p) {
     <div class="outils">
       <button class="btn-rond" id="recentrer" aria-label="Revenir à la vue d'ensemble">${ic('maquette')}</button>
       <button class="btn-rond" id="ar" aria-label="Voir en réalité augmentée" hidden>${ic('realite_augmentee')}</button>
+      <button class="btn-rond" id="quitter-camera" aria-label="Quitter la vue caméra" hidden>${ic('fermer')}</button>
     </div>
     <p class="echelle-note">Maquette au ${p.echelleMaquette}, socle de 40 cm. Le bâtiment n'est pas représenté à taille réelle.</p>
-    <section class="panneau" id="panneau" aria-live="polite"></section>
   </main>`;
   const mv = document.getElementById('mv');
   const panneau = document.getElementById('panneau');
@@ -183,7 +186,12 @@ function vueMaquette(p) {
     rendu();
   });
   mv.addEventListener('error', () => toast('La maquette n’a pas pu se charger. Vérifie ta connexion.'));
-  mv.addEventListener('ar-status', e => { if (e.detail.status === 'failed') toast('La réalité augmentée n’est pas disponible sur cet appareil.'); });
+  mv.addEventListener('ar-status', e => {
+    const s = e.detail.status;
+    if (s === 'failed') toast('La réalité augmentée n’est pas disponible sur cet appareil.');
+    vision.classList.toggle('en-ar', s === 'session-started' || s === 'object-placed');
+    rendu();
+  });
 
   // le panneau du bas cache une partie de l'écran : on décale la cible vers le bas
   // pour que la maquette reste visible dans la partie haute
@@ -196,10 +204,31 @@ function vueMaquette(p) {
     mv.cameraTarget = decale(pt.cible, pt.orbite, 0.07); mv.cameraOrbit = pt.orbite;
   };
   const versGlobal = () => { mv.cameraTarget = decale(p.vueGlobale.cible, p.vueGlobale.orbite, 0.05); mv.cameraOrbit = p.vueGlobale.orbite; };
+  // Android : vraie AR (WebXR) avec les points ; iPhone : vue caméra guidée,
+  // car l'AR native d'Apple (Quick Look) ne sait pas afficher de points cliquables
+  const vision = document.querySelector('.vision'), cam = document.getElementById('camera');
+  let flux = null;
+  async function demarrerCamera() {
+    try {
+      flux = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false });
+      cam.srcObject = flux; cam.hidden = false; await cam.play();
+      vision.classList.add('camera-on'); document.getElementById('quitter-camera').hidden = false;
+      toast('Tourne autour de la maquette avec le doigt, touche les points jaunes.');
+      rendu();
+    } catch (e) { toast('Autorise la caméra pour voir la maquette dans ta pièce.'); }
+  }
+  function arreterCamera() {
+    flux?.getTracks().forEach(t => t.stop()); flux = null; cam.hidden = true;
+    vision.classList.remove('camera-on'); document.getElementById('quitter-camera').hidden = true; rendu();
+  }
+  document.getElementById('quitter-camera').addEventListener('click', arreterCamera);
   const lancerAR = () => {
+    if (ios) return demarrerCamera();
     if (mv.canActivateAR) mv.activateAR();
-    else toast('Ouvre cette page sur ton téléphone pour la réalité augmentée.');
+    else demarrerCamera();
   };
+  const arNatif = () => { if (mv.canActivateAR) mv.activateAR(); };
+  addEventListener('hashchange', () => flux && arreterCamera(), { once: true });
 
   function rendu() {
     document.querySelectorAll('.point').forEach(b => b.classList.toggle('actif', +b.dataset.i === idx && etat === 'point'));
@@ -207,16 +236,20 @@ function vueMaquette(p) {
     prog.innerHTML = progression(etat === 'point' ? 5 : 4);
     mv.autoRotate = etat === 'global' && !calme;
     if (etat === 'global') {
-      const ar = modeChoisi === 'ar' && mv.canActivateAR;
+      const enAR = vision.classList.contains('en-ar') || vision.classList.contains('camera-on');
+      const ar = modeChoisi === 'ar' && mobile && !enAR;
       panneau.innerHTML = `<div class="poignee"></div>
         <p class="surtitre">Vue globale</p>
         <h2 class="titre-2" style="font-size:22px">Fais le tour de la maquette</h2>
         <p class="texte">Glisse pour tourner, pince pour zoomer. ${guide ? `La visite t'emmène vers les ${p.points.length} points jaunes.` : 'Touche un point jaune pour l’ouvrir.'}</p>
         ${ar ? `<button class="btn" id="placer">Placer la maquette devant moi ${ic('realite_augmentee')}</button>` : ''}
+        ${enAR ? `<p class="texte" style="margin-top:-6px"><b style="color:var(--vert)">Tu es en réalité augmentée.</b> Les points jaunes se touchent directement sur la maquette.</p>` : ''}
         ${guide ? `<button class="btn ${ar ? 'btn--contour' : ''}" id="commencer">Commencer la visite guidée ${ic('suivant')}</button>`
                 : `<a class="btn ${ar ? 'btn--contour' : ''}" href="#/p/${p.id}/fin">Terminer la visite ${ic('suivant')}</a>`}
+        ${ar && ios && mv.canActivateAR ? `<button class="lien-discret" id="natif">Ouvrir en AR native iPhone (sans les points)</button>` : ''}
         <p class="note">Maquette au ${p.echelleMaquette}, socle de 40 cm. Le bâtiment n'est pas représenté à taille réelle.</p>`;
       panneau.querySelector('#placer')?.addEventListener('click', lancerAR);
+      panneau.querySelector('#natif')?.addEventListener('click', arNatif);
       panneau.querySelector('#commencer')?.addEventListener('click', () => { etat = 'point'; idx = 0; onglet = 'echelle'; versPoint(0); rendu(); });
     } else {
       const pt = p.points[idx], o = pt.onglets[onglet], dernier = idx === p.points.length - 1;
