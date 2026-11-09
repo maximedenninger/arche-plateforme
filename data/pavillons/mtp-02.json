@@ -1,0 +1,129 @@
+{
+  "code": "MTP-02",
+  "modele": "models/pavillon_02.glb",
+  "echelleMaquette": "1/1 000",
+  "galerie": [
+    {
+      "image": "assets/img/galerie/17_serre_geante_avec_arbres.webp",
+      "legende": "Une nef de verre qui abrite une forêt"
+    },
+    {
+      "image": "assets/img/galerie/18_grande_serre_plantee.webp",
+      "legende": "Les cultures montent en gradins sous le verre"
+    },
+    {
+      "image": "assets/img/galerie/12_pavillon_bulle_en_verre.webp",
+      "legende": "Des bulles de verre pour se réunir"
+    },
+    {
+      "image": "assets/img/galerie/20_bulle_en_verre_au_soleil.webp",
+      "legende": "La lumière traverse tout le bâtiment"
+    }
+  ],
+  "vueGlobale": {
+    "orbite": "40deg 65deg 1.01m",
+    "cible": "0m 0.08m 0m"
+  },
+  "points": [
+    {
+      "nom": "La nef de verre",
+      "image": "assets/img/galerie/18_grande_serre_plantee.webp",
+      "position": "0.06m 0.18m 0m",
+      "normale": "0m 1m 0m",
+      "orbite": "10deg 45deg 0.65m",
+      "cible": "0.03m 0.14m 0m",
+      "onglets": {
+        "echelle": {
+          "titre": "Une serre de 300 m",
+          "texte": "La nef couvre toute la longueur du jardin : 300 m de long, 170 m de haut au faîtage.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "La nef : 170 m de haut, soit un immeuble de 50 étages"
+          }
+        },
+        "usage": {
+          "titre": "Un climat doux toute l’année",
+          "texte": "Le verre capte la chaleur du soleil l’hiver et s’ouvre l’été pour laisser passer l’air."
+        },
+        "message": {
+          "titre": "Habiter dans un jardin",
+          "texte": "Et si l’on vivait à l’intérieur d’un jardin plutôt qu’à côté ?"
+        }
+      }
+    },
+    {
+      "nom": "Terrasses cultivées",
+      "image": "assets/img/galerie/06_canaux_et_toits_plantes.webp",
+      "position": "0.08m 0.045m -0.06m",
+      "normale": "0m 1m 0m",
+      "orbite": "60deg 60deg 0.55m",
+      "cible": "0.06m 0.04m -0.05m",
+      "onglets": {
+        "echelle": {
+          "titre": "Un potager géant partagé",
+          "texte": "Les gradins cultivés produisent une grande partie des légumes des habitants de la serre.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Les gradins : 3 hectares cultivés"
+          }
+        },
+        "usage": {
+          "titre": "Cultiver en bas de chez soi",
+          "texte": "Chaque gradin est entretenu par les habitants. On récolte à 2 minutes de sa porte."
+        },
+        "message": {
+          "titre": "Manger local, vraiment",
+          "texte": "Une ville peut-elle produire une partie de sa propre nourriture ?"
+        }
+      }
+    },
+    {
+      "nom": "Logements en mezzanine",
+      "image": "assets/img/galerie/04_foret_verticale.webp",
+      "position": "-0.07m 0.1m 0.075m",
+      "normale": "0m 1m 0m",
+      "orbite": "-40deg 62deg 0.55m",
+      "cible": "-0.06m 0.08m 0.06m",
+      "onglets": {
+        "echelle": {
+          "titre": "40 logements par mezzanine",
+          "texte": "Les logements sont suspendus le long de la nef, au-dessus des cultures, comme des balcons habités.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Une mezzanine : 70 m au-dessus du sol"
+          }
+        },
+        "usage": {
+          "titre": "Vivre au-dessus du jardin",
+          "texte": "Les fenêtres donnent sur les arbres. Le filet jaune signale les passerelles qui desservent chaque logement."
+        },
+        "message": {
+          "titre": "Partager un même toit",
+          "texte": "Et si tout un quartier partageait un seul grand toit de verre ?"
+        }
+      }
+    }
+  ],
+  "synthese": [
+    {
+      "icone": "echelle",
+      "titre": "Échelle",
+      "texte": "Une nef de verre de 300 m de long."
+    },
+    {
+      "icone": "vegetal",
+      "titre": "Végétal",
+      "texte": "Des gradins cultivés au cœur de la serre."
+    },
+    {
+      "icone": "usages",
+      "titre": "Usages",
+      "texte": "On habite au-dessus de ce que l’on cultive."
+    },
+    {
+      "icone": "message",
+      "titre": "Message",
+      "texte": "Et si la ville nourrissait ses habitants ?"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "version": "2026.11",
+  "contact": "",
+  "themes": {
+    "sol": { "nom": "Sol et vivant", "icone": "vegetal" },
+    "eau": { "nom": "Eau", "icone": "eau" },
+    "alimentation": { "nom": "Se nourrir", "icone": "usages" },
+    "matiere": { "nom": "Matière", "icone": "habitat" },
+    "energie": { "nom": "Énergie", "icone": "energie" },
+    "mobilite": { "nom": "Se déplacer", "icone": "circulation" },
+    "climat": { "nom": "Chaleur et climat", "icone": "climat" }
+  },
+  "statuts": {
+    "explorable": { "nom": "Explorable", "detail": "Maquette en ligne" },
+    "bientot": { "nom": "Ouverture prévue", "detail": "Maquette en cours de finition" },
+    "creation": { "nom": "En création", "detail": "Le collectif imagine le projet" }
+  },
+  "villes": {
+    "montpellier": { "nom": "Montpellier", "region": "Occitanie", "lat": 43.611, "lon": 3.877 },
+    "toulouse": { "nom": "Toulouse", "region": "Occitanie", "lat": 43.604, "lon": 1.444 },
+    "marseille": { "nom": "Marseille", "region": "Provence-Alpes-Côte d'Azur", "lat": 43.296, "lon": 5.370 },
+    "nice": { "nom": "Nice", "region": "Provence-Alpes-Côte d'Azur", "lat": 43.710, "lon": 7.262 },
+    "lyon": { "nom": "Lyon", "region": "Auvergne-Rhône-Alpes", "lat": 45.764, "lon": 4.836 },
+    "grenoble": { "nom": "Grenoble", "region": "Auvergne-Rhône-Alpes", "lat": 45.188, "lon": 5.724 },
+    "clermont-ferrand": { "nom": "Clermont-Ferrand", "region": "Auvergne-Rhône-Alpes", "lat": 45.778, "lon": 3.087 },
+    "bordeaux": { "nom": "Bordeaux", "region": "Nouvelle-Aquitaine", "lat": 44.838, "lon": -0.579 },
+    "nantes": { "nom": "Nantes", "region": "Pays de la Loire", "lat": 47.218, "lon": -1.554 },
+    "rennes": { "nom": "Rennes", "region": "Bretagne", "lat": 48.117, "lon": -1.678 },
+    "paris": { "nom": "Paris", "region": "Île-de-France", "lat": 48.857, "lon": 2.352 },
+    "lille": { "nom": "Lille", "region": "Hauts-de-France", "lat": 50.629, "lon": 3.057 },
+    "le-havre": { "nom": "Le Havre", "region": "Normandie", "lat": 49.494, "lon": 0.108 },
+    "strasbourg": { "nom": "Strasbourg", "region": "Grand Est", "lat": 48.573, "lon": 7.752 },
+    "dijon": { "nom": "Dijon", "region": "Bourgogne-Franche-Comté", "lat": 47.322, "lon": 5.041 }
+  },
+  "porteurs": {
+    "hors-sol": { "nom": "Collectif Hors-Sol", "ville": "Montpellier" },
+    "nef": { "nom": "Atelier Nef", "ville": "Montpellier" },
+    "terre-vive": { "nom": "Terre Vive", "ville": "Lyon" },
+    "lierre": { "nom": "Atelier Lierre", "ville": "Nantes" },
+    "maree": { "nom": "Collectif Marée", "ville": "Marseille" },
+    "seve": { "nom": "Studio Sève", "ville": "Paris" },
+    "boreal": { "nom": "Boréal Architectes", "ville": "Lille" }
+  },
+  "lieux": [
+    {
+      "code": "MTP-01", "ville": "montpellier", "site": "Place de la Comédie", "lat": 43.6085, "lon": 3.8800,
+      "titre": "La ville au-dessus des nuages", "theme": "sol", "statut": "explorable", "porteur": "hors-sol",
+      "question": "Et si cette place s’élevait au-dessus des nuages ?", "accroche": "Des quartiers suspendus pour laisser tout le sol à la forêt.",
+      "image": "assets/img/pavillon_01.webp", "duree": "5 min", "fiche": "data/pavillons/mtp-01.json"
+    },
+    {
+      "code": "MTP-02", "ville": "montpellier", "site": "Jardin des Plantes", "lat": 43.6150, "lon": 3.8720,
+      "titre": "La serre géante", "theme": "alimentation", "statut": "explorable", "porteur": "nef",
+      "question": "Et si ce jardin devenait une serre habitée ?", "accroche": "Une ville qui cultive ce qu’elle mange.",
+      "image": "assets/img/pavillon_02.webp", "duree": "5 min", "fiche": "data/pavillons/mtp-02.json"
+    },
+    {
+      "code": "MTP-03", "ville": "montpellier", "site": "Quartier Antigone", "lat": 43.6080, "lon": 3.8870,
+      "titre": "Le village de terre", "theme": "matiere", "statut": "explorable", "porteur": "terre-vive",
+      "question": "Et si ce quartier était bâti avec sa propre terre ?", "accroche": "Construire avec la terre du chantier.",
+      "image": "assets/img/pavillon_03.webp", "duree": "5 min", "fiche": "data/pavillons/mtp-03.json"
+    },
+    {
+      "code": "LYS-01", "ville": "lyon", "site": "Confluence", "lat": 45.7405, "lon": 4.8180,
+      "titre": "La confluence flottante", "theme": "eau", "statut": "bientot", "ouverture": "2027-03", "porteur": "terre-vive",
+      "question": "Et si le quartier se laissait inonder sans rien perdre ?", "accroche": "Des îlots habités qui montent avec le Rhône et la Saône.",
+      "image": "assets/img/galerie/06_canaux_et_toits_plantes.webp"
+    },
+    {
+      "code": "NTE-01", "ville": "nantes", "site": "Île de Nantes", "lat": 47.2065, "lon": -1.5600,
+      "titre": "L’île-jardin", "theme": "sol", "statut": "bientot", "ouverture": "2027-04", "porteur": "lierre",
+      "question": "Et si une île entière redevenait un jardin habité ?", "accroche": "Les anciens hangars deviennent des serres, les quais des prairies.",
+      "image": "assets/img/galerie/08_quartier_vegetal_vu_du_ciel.webp"
+    },
+    {
+      "code": "LIL-01", "ville": "lille", "site": "Gare Saint-Sauveur", "lat": 50.6260, "lon": 3.0700,
+      "titre": "La gare-serre", "theme": "energie", "statut": "bientot", "ouverture": "2027-05", "porteur": "boreal",
+      "question": "Et si une ancienne gare produisait l’énergie de son quartier ?", "accroche": "Une grande halle de verre qui capte le soleil du Nord.",
+      "image": "assets/img/galerie/12_pavillon_bulle_en_verre.webp"
+    },
+    {
+      "code": "BOD-01", "ville": "bordeaux", "site": "Bassins à flot", "lat": 44.8640, "lon": -0.5530,
+      "titre": "Les bassins nourriciers", "theme": "alimentation", "statut": "bientot", "ouverture": "2027-06", "porteur": "maree",
+      "question": "Et si les bassins du port devenaient des potagers sur l’eau ?", "accroche": "Des radeaux cultivés amarrés au pied des immeubles.",
+      "image": "assets/img/galerie/18_grande_serre_plantee.webp"
+    },
+    {
+      "code": "PAR-01", "ville": "paris", "site": "Porte de la Chapelle", "lat": 48.8980, "lon": 2.3590,
+      "titre": "Le périphérique planté", "theme": "mobilite", "statut": "bientot", "ouverture": "2027-09", "porteur": "seve",
+      "question": "Et si le périphérique devenait une forêt linéaire ?", "accroche": "35 km de voies rendues aux arbres, aux vélos et aux piétons.",
+      "image": "assets/img/galerie/02_ville_vegetale_vue_du_ciel.webp"
+    },
+    {
+      "code": "TLS-01", "ville": "toulouse", "site": "Prairie des Filtres", "lat": 43.5970, "lon": 1.4360,
+      "titre": "La prairie suspendue", "theme": "climat", "statut": "bientot", "ouverture": "2027-06", "porteur": "hors-sol",
+      "question": "Et si la ville se donnait de l’ombre toute seule ?", "accroche": "Une canopée habitée au-dessus de la Garonne.",
+      "image": "assets/img/galerie/04_foret_verticale.webp"
+    },
+    {
+      "code": "MRS-01", "ville": "marseille", "site": "Vieux-Port", "lat": 43.2950, "lon": 5.3740,
+      "titre": "Le port-forêt", "theme": "climat", "statut": "creation", "porteur": "maree",
+      "question": "Et si le port se couvrait d’une forêt de mâts plantés ?", "accroche": "Des voiles végétales pour rafraîchir les quais.",
+      "image": "assets/img/galerie/01_tours_vegetales_et_cascades.webp"
+    },
+    {
+      "code": "PAR-02", "ville": "paris", "site": "Belleville", "lat": 48.8720, "lon": 2.3850,
+      "titre": "Les toits nourriciers", "theme": "alimentation", "statut": "creation", "porteur": "seve",
+      "question": "Et si chaque toit de Paris était un champ ?", "accroche": "Un réseau de fermes reliées par des passerelles de toit en toit.",
+      "image": "assets/img/galerie/03_passerelles_suspendues.webp"
+    },
+    {
+      "code": "SXB-01", "ville": "strasbourg", "site": "Presqu’île Malraux", "lat": 48.5770, "lon": 7.7600,
+      "titre": "Le pont habité", "theme": "mobilite", "statut": "creation", "porteur": "boreal",
+      "question": "Et si un pont devenait un quartier ?", "accroche": "Habiter au-dessus de l’eau, entre deux rives.",
+      "image": "assets/img/galerie/07_tour_en_bois_couverte_d_arbres.webp"
+    },
+    {
+      "code": "RNS-01", "ville": "rennes", "site": "Prairies Saint-Martin", "lat": 48.1250, "lon": -1.6800,
+      "titre": "Les maisons de prairie", "theme": "matiere", "statut": "creation", "porteur": "lierre",
+      "question": "Et si on construisait avec la terre et la paille du site ?", "accroche": "Des maisons semi-enterrées sous un toit de prairie.",
+      "image": "assets/img/galerie/15_habitat_semi_enterre.webp"
+    },
+    {
+      "code": "GNB-01", "ville": "grenoble", "site": "Fort de la Bastille", "lat": 45.1990, "lon": 5.7250,
+      "titre": "La Bastille fraîche", "theme": "climat", "statut": "creation", "porteur": "terre-vive",
+      "question": "Et si la montagne rafraîchissait la ville ?", "accroche": "Des galeries qui font descendre l’air frais des pentes.",
+      "image": "assets/img/galerie/05_tours_organiques.webp"
+    },
+    {
+      "code": "LEH-01", "ville": "le-havre", "site": "Docks Vauban", "lat": 49.4890, "lon": 0.1220,
+      "titre": "Les docks lumière", "theme": "energie", "statut": "creation", "porteur": "boreal",
+      "question": "Et si les docks captaient l’énergie des marées ?", "accroche": "Des halles portuaires qui respirent avec la mer.",
+      "image": "assets/img/galerie/11_cascades_entre_les_iles.webp"
+    },
+    {
+      "code": "NCE-01", "ville": "nice", "site": "Promenade du Paillon", "lat": 43.7000, "lon": 7.2750,
+      "titre": "La promenade ombragée", "theme": "climat", "statut": "creation", "porteur": "maree",
+      "question": "Et si la rivière enterrée revenait à l’air libre ?", "accroche": "Un lit de rivière planté qui traverse la ville.",
+      "image": "assets/img/galerie/19_bulle_en_verre_dans_un_champ.webp"
+    },
+    {
+      "code": "CFE-01", "ville": "clermont-ferrand", "site": "Place de Jaude", "lat": 45.7770, "lon": 3.0820,
+      "titre": "La place volcanique", "theme": "energie", "statut": "creation", "porteur": "terre-vive",
+      "question": "Et si la chaleur du volcan chauffait la place ?", "accroche": "Une serre publique chauffée par la géothermie.",
+      "image": "assets/img/galerie/20_bulle_en_verre_au_soleil.webp"
+    },
+    {
+      "code": "DIJ-01", "ville": "dijon", "site": "Quartier des Maraîchers", "lat": 47.3150, "lon": 5.0300,
+      "titre": "Les dômes maraîchers", "theme": "alimentation", "statut": "creation", "porteur": "nef",
+      "question": "Et si le quartier redevenait une terre de maraîchage ?", "accroche": "Des dômes de terre crue au milieu des cultures.",
+      "image": "assets/img/galerie/13_village_de_domes_en_terre.webp"
+    }
+  ]
+}

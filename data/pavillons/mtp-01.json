@@ -1,0 +1,129 @@
+{
+  "code": "MTP-01",
+  "modele": "models/pavillon_01.glb",
+  "echelleMaquette": "1/2 000",
+  "galerie": [
+    {
+      "image": "assets/img/galerie/10_au_dessus_des_nuages.webp",
+      "legende": "Des îles habitées au-dessus de la mer de nuages"
+    },
+    {
+      "image": "assets/img/galerie/09_iles_volantes_habitees.webp",
+      "legende": "Chaque île porte un quartier entier"
+    },
+    {
+      "image": "assets/img/galerie/11_cascades_entre_les_iles.webp",
+      "legende": "L’eau tombe des îles et arrose la forêt"
+    },
+    {
+      "image": "assets/img/galerie/03_passerelles_suspendues.webp",
+      "legende": "Des passerelles relient les îles à pied"
+    }
+  ],
+  "vueGlobale": {
+    "orbite": "35deg 68deg 1.09m",
+    "cible": "0m 0.15m 0m"
+  },
+  "points": [
+    {
+      "nom": "Jardins suspendus",
+      "image": "assets/img/galerie/01_tours_vegetales_et_cascades.webp",
+      "position": "-0.13m 0.222m -0.06m",
+      "normale": "0m 1m 0m",
+      "orbite": "20deg 55deg 0.61m",
+      "cible": "-0.09m 0.22m -0.04m",
+      "onglets": {
+        "echelle": {
+          "titre": "Une île grande comme un quartier",
+          "texte": "Chaque île mesure environ 300 m de large, soit la taille d’un quartier de 2 000 habitants. Sur la maquette, elle tient dans la main.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Une île : 300 m, soit trois terrains de football"
+          }
+        },
+        "usage": {
+          "titre": "Habiter en terrasses",
+          "texte": "Les logements sont empilés en dalles qui tournent légèrement. Chaque étage a son jardin et reçoit le soleil."
+        },
+        "message": {
+          "titre": "Et si on vivait plus haut ?",
+          "texte": "Monter la ville, c’est rendre la place au vivant en dessous. La question : jusqu’où sommes-nous prêts à quitter le sol ?"
+        }
+      }
+    },
+    {
+      "nom": "Passerelles",
+      "image": "assets/img/galerie/03_passerelles_suspendues.webp",
+      "position": "0.005m 0.2m -0.003m",
+      "normale": "0m 1m 0m",
+      "orbite": "80deg 62deg 0.65m",
+      "cible": "0.005m 0.2m 0m",
+      "onglets": {
+        "echelle": {
+          "titre": "400 m entre deux îles",
+          "texte": "Les passerelles relient les îles à pied ou à vélo, en 5 minutes de marche.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Une passerelle : 400 m de long"
+          }
+        },
+        "usage": {
+          "titre": "Se déplacer sans voiture",
+          "texte": "Pas de routes : on circule par des passerelles légères, éclairées le soir comme des fils de lumière."
+        },
+        "message": {
+          "titre": "Relier plutôt que bétonner",
+          "texte": "Une ville peut-elle fonctionner avec des liens plutôt qu’avec des routes ?"
+        }
+      }
+    },
+    {
+      "nom": "Le sol libéré",
+      "image": "assets/img/galerie/11_cascades_entre_les_iles.webp",
+      "position": "0.12m 0.045m -0.12m",
+      "normale": "0m 1m 0m",
+      "orbite": "120deg 75deg 0.72m",
+      "cible": "0.08m 0.06m -0.08m",
+      "onglets": {
+        "echelle": {
+          "titre": "Toute la place rendue à la forêt",
+          "texte": "Sous les îles, toute la place redevient un sol vivant, que personne ne piétine.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Les îles : 400 m au-dessus du sol, plus haut que la tour Eiffel"
+          }
+        },
+        "usage": {
+          "titre": "Une forêt sous la ville",
+          "texte": "Les cascades arrosent le sol et rafraîchissent l’air. La nature reprend le dessous, au sens propre."
+        },
+        "message": {
+          "titre": "Et si le sol n’était plus à nous ?",
+          "texte": "Ce pavillon pose une question simple : à qui doit appartenir le sol d’une ville ?"
+        }
+      }
+    }
+  ],
+  "synthese": [
+    {
+      "icone": "echelle",
+      "titre": "Échelle",
+      "texte": "Chaque île a la taille d’un quartier."
+    },
+    {
+      "icone": "circulation",
+      "titre": "Circulation",
+      "texte": "Des passerelles relient les îles, sans voiture."
+    },
+    {
+      "icone": "usages",
+      "titre": "Usages",
+      "texte": "On habite en hauteur, la forêt reste libre en bas."
+    },
+    {
+      "icone": "message",
+      "titre": "Message",
+      "texte": "Et si on rendait le sol à la nature ?"
+    }
+  ]
+}

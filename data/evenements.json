@@ -1,0 +1,51 @@
+{
+  "formats": {
+    "plaques": { "nom": "Plaques QR sur les lieux", "icone": "scanner" },
+    "stand": { "nom": "Stand ARCHE", "icone": "maquette" },
+    "ecran": { "nom": "Écran à parallaxe", "icone": "lumiere" }
+  },
+  "evenements": [
+    {
+      "slug": "parcours-montpellier-2026", "titre": "Parcours ARCHE Montpellier", "type": "Parcours en ville",
+      "ville": "montpellier", "adresse": "Départ place de la Comédie", "debut": "2026-11-01", "fin": "2027-02-28",
+      "formats": ["plaques", "stand"], "lieux": ["MTP-01", "MTP-02", "MTP-03"],
+      "texte": "Trois pavillons installés dans le centre de Montpellier. Repère les plaques ARCHE sur les lieux et scanne-les pour ouvrir la maquette.",
+      "image": "assets/img/galerie/10_au_dessus_des_nuages.webp"
+    },
+    {
+      "slug": "rencontres-climat-ville-bordeaux", "titre": "Rencontres Climat et Ville", "type": "Rencontres",
+      "ville": "bordeaux", "adresse": "Hangar 14, quai des Chartrons", "debut": "2026-09-18", "fin": "2026-09-20",
+      "formats": ["stand", "ecran"], "lieux": ["MTP-01", "BOD-01"],
+      "texte": "Première présentation publique d’ARCHE : le stand, l’écran à parallaxe et un aperçu des bassins nourriciers.",
+      "image": "assets/img/galerie/21_maquette_et_hologramme.webp"
+    },
+    {
+      "slug": "salon-habiter-demain-lyon", "titre": "Salon Habiter Demain", "type": "Salon",
+      "ville": "lyon", "adresse": "Halle Tony Garnier", "debut": "2027-03-05", "fin": "2027-03-08",
+      "formats": ["stand", "ecran"], "lieux": ["LYS-01", "MTP-02", "MTP-03"],
+      "texte": "Ouverture de la confluence flottante, en avant-première sur le stand ARCHE.",
+      "image": "assets/img/galerie/06_canaux_et_toits_plantes.webp"
+    },
+    {
+      "slug": "festival-horizons-verts-nantes", "titre": "Festival Horizons Verts", "type": "Festival",
+      "ville": "nantes", "adresse": "Parc des Chantiers, Île de Nantes", "debut": "2027-04-10", "fin": "2027-04-13",
+      "formats": ["stand", "plaques"], "lieux": ["NTE-01", "MTP-01"],
+      "texte": "Quatre jours sur l’Île de Nantes, avec un parcours de plaques ARCHE entre les hangars.",
+      "image": "assets/img/galerie/08_quartier_vegetal_vu_du_ciel.webp"
+    },
+    {
+      "slug": "biennale-villes-possibles-lille", "titre": "Biennale des Villes Possibles", "type": "Biennale",
+      "ville": "lille", "adresse": "Gare Saint-Sauveur", "debut": "2027-05-20", "fin": "2027-06-30",
+      "formats": ["stand", "ecran", "plaques"], "lieux": ["LIL-01", "PAR-01", "MTP-02"],
+      "texte": "Six semaines d’exposition dans la gare elle-même, là où la gare-serre imagine son futur.",
+      "image": "assets/img/galerie/12_pavillon_bulle_en_verre.webp"
+    },
+    {
+      "slug": "nuit-des-futurs-toulouse", "titre": "Nuit des Futurs", "type": "Festival",
+      "ville": "toulouse", "adresse": "Prairie des Filtres", "debut": "2027-06-21", "fin": "2027-06-21",
+      "formats": ["ecran", "plaques"], "lieux": ["TLS-01"],
+      "texte": "Une nuit en plein air au bord de la Garonne pour l’ouverture de la prairie suspendue.",
+      "image": "assets/img/galerie/04_foret_verticale.webp"
+    }
+  ]
+}

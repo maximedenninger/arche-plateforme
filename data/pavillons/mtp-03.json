@@ -1,0 +1,129 @@
+{
+  "code": "MTP-03",
+  "modele": "models/pavillon_03.glb",
+  "echelleMaquette": "1/200",
+  "galerie": [
+    {
+      "image": "assets/img/galerie/13_village_de_domes_en_terre.webp",
+      "legende": "Un village de dômes en terre crue"
+    },
+    {
+      "image": "assets/img/galerie/14_domes_en_terre_crue.webp",
+      "legende": "Des murs épais qui gardent la fraîcheur"
+    },
+    {
+      "image": "assets/img/galerie/15_habitat_semi_enterre.webp",
+      "legende": "Des maisons à moitié enterrées"
+    },
+    {
+      "image": "assets/img/galerie/16_entree_d_une_maison_en_terre.webp",
+      "legende": "Une entrée sous un toit planté"
+    }
+  ],
+  "vueGlobale": {
+    "orbite": "30deg 55deg 0.94m",
+    "cible": "0m 0.02m 0m"
+  },
+  "points": [
+    {
+      "nom": "Le grand dôme",
+      "image": "assets/img/galerie/14_domes_en_terre_crue.webp",
+      "position": "0m 0.06m 0.01m",
+      "normale": "0m 1m 0m",
+      "orbite": "25deg 50deg 0.48m",
+      "cible": "0m 0.03m 0.01m",
+      "onglets": {
+        "echelle": {
+          "titre": "Un dôme de 30 m",
+          "texte": "Le grand dôme accueille la salle commune du village. Il est construit sans béton, en terre crue.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Le grand dôme : 30 m de diamètre"
+          }
+        },
+        "usage": {
+          "titre": "Une salle pour tout le quartier",
+          "texte": "Marché le matin, cinéma le soir : un seul lieu partagé plutôt que dix bâtiments."
+        },
+        "message": {
+          "titre": "Faire plus avec moins",
+          "texte": "Et si un bâtiment partagé valait mieux que plusieurs bâtiments vides ?"
+        }
+      }
+    },
+    {
+      "nom": "Murs en pisé",
+      "image": "assets/img/galerie/16_entree_d_une_maison_en_terre.webp",
+      "position": "0.1m 0.022m -0.022m",
+      "normale": "0m 0m 1m",
+      "orbite": "100deg 70deg 0.43m",
+      "cible": "0.1m 0.02m -0.06m",
+      "onglets": {
+        "echelle": {
+          "titre": "50 cm d’épaisseur",
+          "texte": "Les murs en terre tassée sont épais : ils gardent la fraîcheur l’été et la chaleur l’hiver.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "Un mur en pisé : 50 cm d’épaisseur"
+          }
+        },
+        "usage": {
+          "titre": "La terre du chantier",
+          "texte": "On creuse les fondations, et la terre retirée devient les murs. Rien ne part en décharge."
+        },
+        "message": {
+          "titre": "Un matériau sous nos pieds",
+          "texte": "Et si le meilleur matériau de construction était déjà sur place ?"
+        }
+      }
+    },
+    {
+      "nom": "Cour et chemins",
+      "image": "assets/img/galerie/15_habitat_semi_enterre.webp",
+      "position": "-0.045m 0.025m 0.03m",
+      "normale": "0m 1m 0m",
+      "orbite": "-60deg 58deg 0.51m",
+      "cible": "-0.04m 0.02m 0.03m",
+      "onglets": {
+        "echelle": {
+          "titre": "Tout à 1 minute à pied",
+          "texte": "Les dômes se regroupent autour d’une cour. Aucun trajet ne dépasse 100 m.",
+          "comparer": {
+            "humain": "1,7 m",
+            "objet": "La cour : 20 m de large"
+          }
+        },
+        "usage": {
+          "titre": "Une rue qui redevient un jardin",
+          "texte": "Les chemins de terre battue remplacent l’asphalte : l’eau de pluie s’infiltre au lieu de ruisseler."
+        },
+        "message": {
+          "titre": "Ralentir la ville",
+          "texte": "Et si un quartier était pensé pour marcher, et pas pour traverser ?"
+        }
+      }
+    }
+  ],
+  "synthese": [
+    {
+      "icone": "echelle",
+      "titre": "Échelle",
+      "texte": "Des dômes de 13 à 30 m de diamètre."
+    },
+    {
+      "icone": "habitat",
+      "titre": "Matière",
+      "texte": "Des murs en terre crue, sans béton."
+    },
+    {
+      "icone": "circulation",
+      "titre": "Circulation",
+      "texte": "Tout le village se traverse à pied."
+    },
+    {
+      "icone": "message",
+      "titre": "Message",
+      "texte": "Et si on construisait avec ce qui est déjà là ?"
+    }
+  ]
+}

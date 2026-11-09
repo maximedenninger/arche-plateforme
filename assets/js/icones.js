@@ -1,5 +1,10 @@
 // Icônes ARCHE (02_Icones), trait 1,5 px, couleur héritée du texte
 export const ICONES = {
+"eau": "<path d=\"M12 3l5.2 8.2A6 6 0 1 1 6.8 11.2z\"/><path d=\"M9 15.5a3 3 0 0 0 3 3\"/>",
+"energie": "<path d=\"M13.5 2.5L5 13.5h6.5l-1 8 8.5-11h-6.5z\"/>",
+"climat": "<path d=\"M10 4.5a2 2 0 0 1 4 0v9.3a4 4 0 1 1-4 0z\"/><path d=\"M12 8v8\"/><path d=\"M17.5 6h3\"/><path d=\"M17.5 9.5h2\"/>",
+"filtre": "<path d=\"M3.5 5h17\"/><path d=\"M6.5 12h11\"/><path d=\"M9.5 19h5\"/>",
+"liste": "<path d=\"M8 6h12.5\"/><path d=\"M8 12h12.5\"/><path d=\"M8 18h12.5\"/><path d=\"M3.5 6h2\"/><path d=\"M3.5 12h2\"/><path d=\"M3.5 18h2\"/>",
 "vegetal": "<path d=\"M5 19c0-8 5-13.5 14-14 .2 8.5-5 14-12 14z\"/><path d=\"M5 19l8-8\"/>",
 "habitat": "<path d=\"M3 20h18\"/><path d=\"M5 20V11l7-6 7 6v9\"/><path d=\"M10 20v-5h4v5\"/>",
 "plan": "<rect x=\"3.5\" y=\"3.5\" width=\"17\" height=\"17\"/><path d=\"M3.5 12h9v8.5\"/><path d=\"M12.5 3.5v5\"/>",
