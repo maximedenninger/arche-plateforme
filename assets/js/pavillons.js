@@ -16,10 +16,17 @@ export const PAVILLONS = [
     echelleMaquette: '1/2 000',
     duree: '5 min',
     accroche: 'Des quartiers suspendus pour laisser tout le sol à la forêt.',
+    galerie: [
+      { image: 'assets/img/galerie/10_au_dessus_des_nuages.webp', legende: 'Des îles habitées au-dessus de la mer de nuages' },
+      { image: 'assets/img/galerie/09_iles_volantes_habitees.webp', legende: 'Chaque île porte un quartier entier' },
+      { image: 'assets/img/galerie/11_cascades_entre_les_iles.webp', legende: 'L\u2019eau tombe des îles et arrose la forêt' },
+      { image: 'assets/img/galerie/03_passerelles_suspendues.webp', legende: 'Des passerelles relient les îles à pied' },
+    ],
     vueGlobale: { orbite: '35deg 68deg 1.09m', cible: '0m 0.15m 0m' },
     points: [
       {
         nom: 'Jardins suspendus',
+        image: 'assets/img/galerie/01_tours_vegetales_et_cascades.webp',
         position: '-0.13m 0.222m -0.06m', normale: '0m 1m 0m',
         orbite: '20deg 55deg 0.61m', cible: '-0.09m 0.22m -0.04m',
         onglets: {
@@ -30,6 +37,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Passerelles',
+        image: 'assets/img/galerie/03_passerelles_suspendues.webp',
         position: '0.005m 0.2m -0.003m', normale: '0m 1m 0m',
         orbite: '80deg 62deg 0.65m', cible: '0.005m 0.2m 0m',
         onglets: {
@@ -40,6 +48,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Le sol libéré',
+        image: 'assets/img/galerie/11_cascades_entre_les_iles.webp',
         position: '0.12m 0.045m -0.12m', normale: '0m 1m 0m',
         orbite: '120deg 75deg 0.72m', cible: '0.08m 0.06m -0.08m',
         onglets: {
@@ -67,10 +76,17 @@ export const PAVILLONS = [
     echelleMaquette: '1/1 000',
     duree: '5 min',
     accroche: 'Une ville qui cultive ce qu’elle mange.',
+    galerie: [
+      { image: 'assets/img/galerie/17_serre_geante_avec_arbres.webp', legende: 'Une nef de verre qui abrite une forêt' },
+      { image: 'assets/img/galerie/18_grande_serre_plantee.webp', legende: 'Les cultures montent en gradins sous le verre' },
+      { image: 'assets/img/galerie/12_pavillon_bulle_en_verre.webp', legende: 'Des bulles de verre pour se réunir' },
+      { image: 'assets/img/galerie/20_bulle_en_verre_au_soleil.webp', legende: 'La lumière traverse tout le bâtiment' },
+    ],
     vueGlobale: { orbite: '40deg 65deg 1.01m', cible: '0m 0.08m 0m' },
     points: [
       {
         nom: 'La nef de verre',
+        image: 'assets/img/galerie/18_grande_serre_plantee.webp',
         position: '0.06m 0.18m 0m', normale: '0m 1m 0m',
         orbite: '10deg 45deg 0.65m', cible: '0.03m 0.14m 0m',
         onglets: {
@@ -81,6 +97,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Terrasses cultivées',
+        image: 'assets/img/galerie/06_canaux_et_toits_plantes.webp',
         position: '0.08m 0.045m -0.06m', normale: '0m 1m 0m',
         orbite: '60deg 60deg 0.55m', cible: '0.06m 0.04m -0.05m',
         onglets: {
@@ -91,6 +108,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Logements en mezzanine',
+        image: 'assets/img/galerie/04_foret_verticale.webp',
         position: '-0.07m 0.1m 0.075m', normale: '0m 1m 0m',
         orbite: '-40deg 62deg 0.55m', cible: '-0.06m 0.08m 0.06m',
         onglets: {
@@ -118,10 +136,17 @@ export const PAVILLONS = [
     echelleMaquette: '1/200',
     duree: '5 min',
     accroche: 'Construire avec la terre du chantier.',
+    galerie: [
+      { image: 'assets/img/galerie/13_village_de_domes_en_terre.webp', legende: 'Un village de dômes en terre crue' },
+      { image: 'assets/img/galerie/14_domes_en_terre_crue.webp', legende: 'Des murs épais qui gardent la fraîcheur' },
+      { image: 'assets/img/galerie/15_habitat_semi_enterre.webp', legende: 'Des maisons à moitié enterrées' },
+      { image: 'assets/img/galerie/16_entree_d_une_maison_en_terre.webp', legende: 'Une entrée sous un toit planté' },
+    ],
     vueGlobale: { orbite: '30deg 55deg 0.94m', cible: '0m 0.02m 0m' },
     points: [
       {
         nom: 'Le grand dôme',
+        image: 'assets/img/galerie/14_domes_en_terre_crue.webp',
         position: '0m 0.06m 0.01m', normale: '0m 1m 0m',
         orbite: '25deg 50deg 0.48m', cible: '0m 0.03m 0.01m',
         onglets: {
@@ -132,6 +157,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Murs en pisé',
+        image: 'assets/img/galerie/16_entree_d_une_maison_en_terre.webp',
         position: '0.1m 0.022m -0.022m', normale: '0m 0m 1m',
         orbite: '100deg 70deg 0.43m', cible: '0.1m 0.02m -0.06m',
         onglets: {
@@ -142,6 +168,7 @@ export const PAVILLONS = [
       },
       {
         nom: 'Cour et chemins',
+        image: 'assets/img/galerie/15_habitat_semi_enterre.webp',
         position: '-0.045m 0.025m 0.03m', normale: '0m 1m 0m',
         orbite: '-60deg 58deg 0.51m', cible: '-0.04m 0.02m 0.03m',
         onglets: {
@@ -158,6 +185,15 @@ export const PAVILLONS = [
       { icone: 'message', titre: 'Message', texte: 'Et si on construisait avec ce qui est déjà là ?' },
     ],
   },
+];
+
+/* Galerie de l'étape « C'est quoi une architecture spéculative ? » */
+export const GALERIE_SPECULATIVE = [
+  { image: 'assets/img/galerie/05_tours_organiques.webp', legende: 'Des tours qui poussent comme des plantes' },
+  { image: 'assets/img/galerie/02_ville_vegetale_vue_du_ciel.webp', legende: 'Une ville où le végétal est l\u2019infrastructure' },
+  { image: 'assets/img/galerie/07_tour_en_bois_couverte_d_arbres.webp', legende: 'Construire en bois, habiter dans les arbres' },
+  { image: 'assets/img/galerie/08_quartier_vegetal_vu_du_ciel.webp', legende: 'Des quartiers qui rafraîchissent la ville' },
+  { image: 'assets/img/galerie/21_maquette_et_hologramme.webp', legende: 'La maquette : l\u2019outil pour imaginer avant de construire' },
 ];
 
 /* Mention obligatoire (projet d'école) : affichée en petit partout où l'on voit une maquette */

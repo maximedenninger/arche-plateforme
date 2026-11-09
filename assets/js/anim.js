@@ -74,7 +74,7 @@ export function balayage() {
 export function animer(racine) {
   // titres : chaque mot monte derrière un masque
   racine.querySelectorAll('.titre, .titre-2').forEach(t => {
-    if (t.dataset.anime) return; t.dataset.anime = '1';
+    if (t.dataset.anime || /<[a-z]/i.test(t.innerHTML)) return; t.dataset.anime = '1';
     const mots = t.innerHTML.split(/(\s+)/);
     t.innerHTML = mots.map((m, i) => /^\s+$/.test(m) ? m : `<span class="mot"><span style="--d:${i * 28}ms">${m}</span></span>`).join('');
   });
@@ -86,4 +86,39 @@ export function animer(racine) {
   racine.querySelectorAll('.carte, .choix, .lignes li').forEach(c => { c.classList.add('a-voir'); io.observe(c); });
   // petit retour tactile sur tout ce qui se touche (Android)
   racine.querySelectorAll('.btn, .carte, .choix, .point, .btn-rond').forEach(b => b.addEventListener('pointerdown', () => vibre(8), { passive: true }));
+}
+
+/* ---------- hero en parallaxe : couches qui glissent au défilement,
+   suivent l'inclinaison du téléphone (Android) ou la souris, et la barre
+   du haut devient pleine quand on quitte le hero ---------- */
+let nettoyerParallaxe = null;
+export function initParallaxe(hero, barre) {
+  nettoyerParallaxe?.();
+  if (!hero) return;
+  const couches = [...hero.querySelectorAll('[data-v]')].map(el => ({ el, v: +el.dataset.v }));
+  let sy = 0, ix = 0, iy = 0, cx = 0, cy = 0, run = true;
+  const surScroll = () => { sy = scrollY; barre?.classList.toggle('solide', sy > hero.offsetHeight - 90); };
+  const surSouris = e => { ix = (e.clientX / innerWidth - 0.5) * 2; iy = (e.clientY / innerHeight - 0.5) * 2; };
+  const surTilt = e => { if (e.gamma == null) return; ix = Math.max(-1, Math.min(1, e.gamma / 25)); iy = Math.max(-1, Math.min(1, (e.beta - 45) / 25)); };
+  addEventListener('scroll', surScroll, { passive: true });
+  addEventListener('pointermove', surSouris, { passive: true });
+  addEventListener('deviceorientation', surTilt, { passive: true });
+  const tour = () => {
+    if (!run) return;
+    cx += (ix - cx) * 0.06; cy += (iy - cy) * 0.06;
+    if (sy < hero.offsetHeight * 1.3) {
+      for (const { el, v } of couches) {
+        const ty = sy * v * 0.55, tx = cx * v * 14, tz = cy * v * 8;
+        el.style.transform = `translate3d(${tx.toFixed(1)}px, ${(ty + tz).toFixed(1)}px, 0) scale(${(1.06 + v * 0.06 + sy * v * 0.00012).toFixed(4)})`;
+      }
+      const t = hero.querySelector('.hero-texte');
+      if (t) { t.style.transform = `translate3d(0, ${(sy * 0.25).toFixed(1)}px, 0)`; t.style.opacity = Math.max(0, 1 - sy / (hero.offsetHeight * 0.6)).toFixed(3); }
+    }
+    requestAnimationFrame(tour);
+  };
+  surScroll();
+  if (!calme) requestAnimationFrame(tour);
+  hero.classList.add('pret');
+  nettoyerParallaxe = () => { run = false; removeEventListener('scroll', surScroll); removeEventListener('pointermove', surSouris); removeEventListener('deviceorientation', surTilt); };
+  addEventListener('hashchange', () => nettoyerParallaxe?.(), { once: true });
 }
